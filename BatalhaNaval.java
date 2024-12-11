@@ -8,6 +8,8 @@ public class BatalhaNaval {
         System.out.println("Informe o nome do Jogador 1:");
         Jogador jogador1 = new Jogador(scanner.nextLine());
 
+        System.out.println();
+        
         System.out.println("Informe o nome do Jogador 2:");
         Jogador jogador2 = new Jogador(scanner.nextLine());
 
@@ -44,7 +46,7 @@ public class BatalhaNaval {
     private static void posicionarArmas(Scanner scanner, Jogador jogador) {
         // Posicionar submarinos
         for (int i = 1; i <= 3; i++) {
-            System.out.println("Submarino " + i + " (1 espaço, ex.: 0 0):");
+            System.out.println("Submarino " + i + " (ex.: 0 0):");
             int[] posicao = lerPosicao(scanner);
             while (!jogador.posicionarArma(posicao[0], posicao[1], 'S', 1)) {
                 System.out.println("Erro: Posição inválida ou espaço ocupado. Tente novamente.");
@@ -55,7 +57,7 @@ public class BatalhaNaval {
 
         // Posicionar cruzadores
         for (int i = 1; i <= 2; i++) {
-            System.out.println("Cruzador " + i + " (2 espaços, ex.: 0 0):");
+            System.out.println("Cruzador " + i + " (ex.: 0 0):");
             int[] posicao = lerPosicao(scanner);
             while (!jogador.posicionarArma(posicao[0], posicao[1], 'C', 2)) {
                 System.out.println("Erro: Posição inválida ou espaço ocupado. Tente novamente.");
@@ -65,7 +67,7 @@ public class BatalhaNaval {
         }
 
         // Posicionar porta-aviões
-        System.out.println("Porta-Aviões (5 espaços, ex.: 0 0):");
+        System.out.println("Porta-Aviões (ex.: 0 0):");
         int[] posicao = lerPosicao(scanner);
         while (!jogador.posicionarArma(posicao[0], posicao[1], 'P', 5)) {
             System.out.println("Erro: Posição inválida ou espaço ocupado. Tente novamente.");
@@ -107,7 +109,6 @@ public class BatalhaNaval {
     private static int[] lerPosicao(Scanner scanner) {
         int linha = -1, coluna = -1;
         do {
-            System.out.print("Digite a linha e a coluna (ex.: 0 0): ");
             if (scanner.hasNextInt()) {
                 linha = scanner.nextInt();
                 if (scanner.hasNextInt()) {
@@ -117,7 +118,7 @@ public class BatalhaNaval {
                     }
                 }
             }
-            scanner.nextLine(); // Limpa entrada inválida
+            scanner.nextLine(); 
             System.out.println("Erro: Entrada inválida. Tente novamente.");
         } while (true);
     }
