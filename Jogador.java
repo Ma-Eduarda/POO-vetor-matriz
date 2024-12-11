@@ -45,11 +45,11 @@ class Jogador {
 
     public boolean posicionarArma(int linha, int coluna, char tipo, int tamanho) {
         if (coluna + tamanho > 8 || linha < 0 || linha >= 8) {
-            return false; // Fora dos limites
+            return false; 
         }
         for (int i = 0; i < tamanho; i++) {
             if (meuJogo[linha][coluna + i] != '~') {
-                return false; // Espaço ocupado
+                return false; 
             }
         }
         for (int i = 0; i < tamanho; i++) {
