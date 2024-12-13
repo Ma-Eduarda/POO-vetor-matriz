@@ -59,21 +59,30 @@ public class BatalhaNaval {
     }
 
     private static boolean realizarTiros(Scanner scanner, Jogador atirador, Jogador alvo) {
-        for (int i = 0; i < 2; i++) { 
+        int tirosDisponiveis = 2;
+    
+        while (tirosDisponiveis > 0) {
             System.out.println("Informe a posição do tiro (linha coluna ex: 1 1):");
             int linha = scanner.nextInt();
             int coluna = scanner.nextInt();
-
-            boolean acertou = alvo.verificarSeAcertou(linha, coluna);
-            atirador.registrarTiro(linha, coluna, acertou);
-
-            System.out.println(acertou ? "Acertou!" : "Errou!");
-            atirador.mostrarTabuleiro(false);
+    
+            // Verificar se a posição já foi atacada
+            if (atirador.getJogoDoAdversario()[linha - 1][coluna - 1] != '~') {
+                System.out.println("Você já atirou nesta posição! Tente novamente.");
+            } else {
+                boolean acertou = alvo.verificarSeAcertou(linha, coluna);
+                atirador.registrarTiro(linha, coluna, acertou);
+    
+                System.out.println(acertou ? "Acertou!" : "Errou!");
+                atirador.mostrarTabuleiro(false);
+    
+                tirosDisponiveis--; 
+            }
         }
-
+    
         return !verificarFimDoJogo(alvo);
     }
-
+    
     private static boolean verificarFimDoJogo(Jogador jogador) {
         for (int i = 0; i < 8; i++) {
             for (int c = 0; c < 8; c++) {
@@ -83,6 +92,6 @@ public class BatalhaNaval {
             }
         }
         System.out.println("Todas as armas de " + jogador.getNome() + " foram destruídas!");
-        return true;
+        return true; 
     }
 }
