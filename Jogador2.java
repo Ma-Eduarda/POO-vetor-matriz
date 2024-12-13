@@ -57,21 +57,26 @@ public class Jogador {
     }
 
     public boolean verificarSeAcertou(int linha, int coluna) {
-        if (meuJogo[linha - 1][coluna - 1] != '~' && meuJogo[linha - 1][coluna - 1] != 'X' && meuJogo[linha - 1][coluna - 1] != 'O') {
+        if (meuJogo[linha - 1][coluna - 1] == 'X' || meuJogo[linha - 1][coluna - 1] == 'O') {
+            System.out.println("Você já atirou neste local!");
+            return false;
+        }
+        if (meuJogo[linha - 1][coluna - 1] != '~') {
             meuJogo[linha - 1][coluna - 1] = 'O'; 
             return true;
-            
         }
         meuJogo[linha - 1][coluna - 1] = 'X'; 
         return false;
     }
 
     public void registrarTiro(int linha, int coluna, boolean acertou) {
-        jogoDoAdversario[linha - 1][coluna - 1] = acertou ? 'O' : 'X';
+        if (jogoDoAdversario[linha - 1][coluna - 1] != 'O') {
+            jogoDoAdversario[linha - 1][coluna - 1] = acertou ? 'O' : 'X';
+        }
     }
 
     public void mostrarTabuleiro(boolean mostrarArmas) {
-        System.out.println("Tabuleiro de " + nome + (mostrarArmas ? " (com armas):" : " (do adversário):"));
+        System.out.println("Tabuleiro de " + nome + ":");
 
         System.out.print("  ");
         for (int i = 1; i <= 8; i++) {
@@ -79,7 +84,6 @@ public class Jogador {
         }
         System.out.println();
 
-        
         char[][] tabuleiro = mostrarArmas ? meuJogo : jogoDoAdversario;
         for (int i = 0; i < 8; i++) {
             System.out.print((i + 1) + " "); 
